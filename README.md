@@ -1,6 +1,6 @@
 
 #### 这是一个非官方的社区维护的库。有bug欢迎朋友们指出，互相学习。本项目基于 [chatgpt-java增加了对o系列模型的支持](https://github.com/Grt1228/chatgpt-java)
-#### 本项目会一直随着OpenAi模型的跟新一直更新
+#### 本项目会一直随着OpenAi模型的更新一直更新
 
 ### 💬 联系我，VX:YPK00101 ChatGPT相关学习交流咨询全部免费。
 
@@ -224,7 +224,7 @@ public class Test {
 ```
 ## 方式二（下载源码直接运行）
 下载源码打包
-# ❔ QA
+#  QA
 Q | A
 ---|---
 如何实现连续对话？ | issues：https://github.com/Grt1228/chatgpt-java/issues/8
