@@ -7,7 +7,6 @@ import com.unfbx.chatgpt.entity.chat.ResponseFormat;
 import com.unfbx.chatgpt.entity.chat.tool.Tools;
 import com.unfbx.chatgpt.entity.chat.tool.ToolChoice;
 import com.unfbx.chatgpt.entity.chat.tool.ToolChoiceObj;
-import com.unfbx.chatgpt.models.Models;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -23,7 +22,7 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseChatOCompletion extends Models implements Serializable {
+public class BaseChatOCompletion  implements Serializable {
 
     @NonNull
     @Builder.Default
@@ -78,7 +77,7 @@ public class BaseChatOCompletion extends Models implements Serializable {
     private Object toolChoice;
 
     /**
-     * 使用什么取样温度，0到2之间。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加集中和确定。
+     * 必须是 1
      * <p>
      * We generally recommend altering this or but not both.top_p
      */
@@ -114,6 +113,13 @@ public class BaseChatOCompletion extends Models implements Serializable {
      * 停止输出标识
      */
     private List<String> stop;
+//    /**
+//     * 最大支持4096
+//     */
+//    @JsonProperty("max_tokens")
+//    @Builder.Default
+//    private Integer maxTokens = 2048;
+
 
     @JsonProperty("presence_penalty")
     @Builder.Default
@@ -141,6 +147,95 @@ public class BaseChatOCompletion extends Models implements Serializable {
      * @since 1.1.6
      */
     private Boolean logprobs;
+    /**
+     * @since 1.1.6
+     */
+//    @JsonProperty("top_logprobs")
+//    private Integer topLogprobs;
 
+
+    @Getter
+    @AllArgsConstructor
+    public enum Model {
+        /**
+         * gpt-3.5-turbo
+         */
+        GPT_3_5_TURBO("gpt-3.5-turbo"),
+        /**
+         * 临时模型，不建议使用，2023年9 月 13 日将被弃用
+         */
+        @Deprecated
+        GPT_3_5_TURBO_0301("gpt-3.5-turbo-0301"),
+        /**
+         * gpt-3.5-turbo-0613 支持函数
+         */
+        GPT_3_5_TURBO_0613("gpt-3.5-turbo-0613"),
+        /**
+         * gpt-3.5-turbo-16k 超长上下文
+         */
+        GPT_3_5_TURBO_16K("gpt-3.5-turbo-16k"),
+        /**
+         * gpt-3.5-turbo-16k-0613 超长上下文 支持函数
+         */
+        GPT_3_5_TURBO_16K_0613("gpt-3.5-turbo-16k-0613"),
+        /**
+         * gpt-3.5-turbo-1106 最新的 GPT-3.5 Turbo 模型具有改进的指令跟踪、JSON 模式、可重现的输出、并行函数调用等。
+         */
+        GPT_3_5_TURBO_1106("gpt-3.5-turbo-1106"),
+        /**
+         * GPT4.0
+         */
+        GPT_4("gpt-4"),
+        /**
+         * 临时模型，不建议使用，2023年9 月 13 日将被弃用
+         */
+        @Deprecated
+        GPT_4_0314("gpt-4-0314"),
+        /**
+         * GPT4.0 超长上下文
+         */
+        GPT_4_32K("gpt-4-32k"),
+        /**
+         * 临时模型，不建议使用，2023年9 月 13 日将被弃用
+         */
+        @Deprecated
+        GPT_4_32K_0314("gpt-4-32k-0314"),
+
+        /**
+         * gpt-4-0613，支持函数
+         */
+        GPT_4_0613("gpt-4-0613"),
+        /**
+         * gpt-4-0613，支持函数
+         */
+        GPT_4_32K_0613("gpt-4-32k-0613"),
+        /**
+         * 支持数组模式，支持function call，支持可重复输出
+         */
+        GPT_4_1106_PREVIEW("gpt-4-1106-preview"),
+        /**
+         * 支持图片
+         */
+        GPT_4_VISION_PREVIEW("gpt-4-vision-preview"),
+
+        /**
+         * 支持图片
+         */
+        GPT_4_O("chatgpt-4o-latest"),
+        /**
+         * 支持图片
+         */
+        GPT_4_O_MINI("gpt-4o-mini-2024-07-18"),
+        /**
+         * 不支图片输入 不支持上下文 不支持提示词
+         */
+        O1_MINI("o1-mini-2024-09-12"),
+        /**
+         * 不支图片输入 不支持上下文 不支持提示词
+         */
+        O1_MINI_PREVIEW("o1-preview-2024-09-12")
+        ;
+        private final String name;
+    }
 
 }
