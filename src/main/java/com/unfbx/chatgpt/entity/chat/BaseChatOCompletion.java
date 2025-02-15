@@ -233,7 +233,7 @@ public class BaseChatOCompletion  implements Serializable {
         /**
          * 不支图片输入 不支持上下文 不支持提示词
          */
-        O1_MINI_PREVIEW("o1-preview-2024-09-12")
+        O1_PREVIEW("o1-preview-2024-09-12")
         ;
         private final String name;
     }
